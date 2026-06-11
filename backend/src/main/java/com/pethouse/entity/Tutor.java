@@ -1,7 +1,9 @@
 package com.pethouse.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 public class Tutor {
 
@@ -11,4 +13,6 @@ public class Tutor {
 
     private String nome;
     private String cpf;
+    private String telefone;
+    private String endereco;
 }
