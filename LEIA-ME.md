@@ -9,7 +9,7 @@ source backend/src/main/resources/banco.sql
 
 ### 2. Backend — Spring Boot
 ```bash
-cd backend
+
 mvn spring-boot:run
 ```
 ✅ API em → http://localhost:8081
