@@ -5,3 +5,13 @@ frontend/dist/
 *.log
 .env
 .vscode/
+# Variáveis de ambiente
+.env
+backend/.env
+
+# Java
+backend/target/
+
+# Node
+frontend/node_modules/
+frontend/dist/
