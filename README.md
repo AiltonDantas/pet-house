@@ -1,41 +1,30 @@
 # 🐾 Pet House
 
-Sistema web para gerenciamento de clínicas veterinárias, desenvolvido como projeto acadêmico. O sistema permite controlar tutores, animais, consultas, atendimentos, pagamentos, serviços e usuários de forma prática e organizada.
+Sistema de gerenciamento para clínica veterinária, desenvolvido para facilitar o controle de animais, tutores, atendimentos, consultas, serviços e pagamentos.
 
-## 📖 Sobre o projeto
-
-O **Pet House** foi criado com o objetivo de facilitar a administração de clínicas veterinárias, oferecendo um sistema completo para gerenciamento dos principais processos do estabelecimento.
-
-### Funcionalidades
-
-- 👤 Cadastro de usuários
-- 🐶 Cadastro de animais
-- 👨‍👩‍👧 Cadastro de tutores
-- 📅 Agendamento de consultas
-- 🩺 Controle de atendimentos
-- 💳 Gerenciamento de pagamentos
-- 📋 Cadastro de serviços
-- 📊 Relatórios do sistema
+O projeto possui um **backend em Java Spring Boot**, um **frontend em React** e utiliza **MySQL** como banco de dados.
 
 ---
 
-# 🛠 Tecnologias utilizadas
+# 🚀 Tecnologias utilizadas
 
 ## Backend
-
-- Java 21
-- Spring Boot
+- Java 17+
+- Spring Boot 3
 - Spring Data JPA
-- Maven
+- Hibernate
 - MySQL
+- Maven
 
 ## Frontend
-
 - React
+- Vite
 - JavaScript
-- HTML5
-- CSS3
+- Tailwind CSS
 - Axios
+
+## Banco de Dados
+- MySQL 8
 
 ---
 
@@ -46,39 +35,34 @@ Pet House
 │
 ├── backend
 │   ├── src
-│   ├── pom.xml
-│   └── Dockerfile
+│   │   └── main
+│   │       ├── java
+│   │       └── resources
+│   │           ├── application.properties
+│   │           └── banco.sql
+│   │
+│   └── pom.xml
 │
 ├── frontend
 │   ├── src
 │   ├── public
-│   └── package.json
+│   ├── package.json
+│   └── vite.config.js
 │
-├── Dockerfile
 └── README.md
 ```
 
 ---
 
-# 🚀 Como executar o projeto
+# ⚙️ Como executar o projeto
 
-## Pré-requisitos
-
-- Java 21+
-- Maven 3.9+
-- Node.js 18+
-- MySQL
-- Git
-
----
-
-## 1. Clone o projeto
+## 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/SEU-USUARIO/pet-house.git
+git clone https://github.com/AiltonDantas/pet-house.git
 ```
 
-Entre na pasta:
+Acesse a pasta:
 
 ```bash
 cd pet-house
@@ -86,7 +70,33 @@ cd pet-house
 
 ---
 
-## 2. Executando o Backend
+# 🗄️ Configuração do Banco de Dados
+
+Certifique-se que o MySQL está instalado e funcionando.
+
+Entre no MySQL:
+
+```bash
+mysql -u root -p
+```
+
+Crie o banco de dados:
+
+```sql
+CREATE DATABASE pethouse;
+```
+
+Depois:
+
+```sql
+USE pethouse;
+```
+
+As tabelas serão criadas automaticamente pelo sistema.
+
+---
+
+# 🔧 Configuração do Backend
 
 Entre na pasta:
 
@@ -94,13 +104,36 @@ Entre na pasta:
 cd backend
 ```
 
-Execute:
+Configure o arquivo:
+
+```
+src/main/resources/application.properties
+```
+
+Exemplo:
+
+```properties
+server.port=8080
+
+spring.datasource.url=jdbc:mysql://localhost:3306/pethouse?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=root123
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.open-in-view=false
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+```
+
+Execute o backend:
 
 ```bash
 mvn spring-boot:run
 ```
 
-O servidor ficará disponível em:
+Backend:
 
 ```
 http://localhost:8080
@@ -108,7 +141,7 @@ http://localhost:8080
 
 ---
 
-## 3. Executando o Frontend
+# 💻 Configuração do Frontend
 
 Abra outro terminal:
 
@@ -125,78 +158,93 @@ npm install
 Execute:
 
 ```bash
-npm start
+npm run dev
 ```
 
-O sistema abrirá em:
+Frontend:
 
 ```
-http://localhost:3000
-```
-
----
-
-# 🗄 Banco de Dados
-
-O projeto utiliza **MySQL**.
-
-Configure o banco de dados no arquivo:
-
-```
-application.properties
-```
-
-Exemplo:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/pethouse
-spring.datasource.username=root
-spring.datasource.password=senha
+http://localhost:5173
 ```
 
 ---
 
-# 📚 API
+# 🔗 Comunicação com a API
 
-O backend possui endpoints REST para gerenciamento de:
+O frontend utiliza Axios para comunicação com o backend.
 
-- Usuários
-- Animais
-- Tutores
-- Consultas
-- Atendimentos
-- Pagamentos
-- Serviços
-- Relatórios
-
----
-
-# 📌 Arquitetura
-
-O backend segue a arquitetura em camadas:
+Arquivo:
 
 ```
-Controller
-    ↓
-Service
-    ↓
-Repository
-    ↓
-Banco de Dados
+frontend/src/services/api.js
+```
+
+Configuração:
+
+```javascript
+baseURL: "http://localhost:8080/api"
 ```
 
 ---
 
-# 👨‍💻 Desenvolvedores
+# 📌 Funcionalidades
 
-Projeto desenvolvido para fins acadêmicos.
+## 👤 Usuários
+- Cadastro de usuários
+- Login no sistema
+- Controle de acesso
 
-Equipe:
+## 🐶 Animais
+- Cadastro de animais
+- Associação com tutores
+- Consulta de informações
 
-- Ailton Santos Dantas
+## 👨‍⚕️ Atendimentos
+- Registro de atendimentos
+- Histórico de consultas
+
+## 💊 Serviços
+- Cadastro de serviços veterinários
+
+## 💳 Pagamentos
+- Controle financeiro dos atendimentos
+
+---
+
+# 🗃️ Banco de Dados
+
+Principais tabelas:
+
+- usuarios
+- tutores
+- animais
+- atendimentos
+- consultas
+- servicos
+- atendimento_servicos
+- pagamentos
+
+---
+
+# 🛠️ Requisitos
+
+Para executar o projeto é necessário:
+
+- Java JDK 17 ou superior
+- Maven
+- Node.js
+- MySQL 8
+
+---
+
+# 👨‍💻 Desenvolvedor
+
+**Ailton Dantas**
+
+Projeto desenvolvido para estudo e prática de desenvolvimento Full Stack.
 
 ---
 
 # 📄 Licença
 
-Este projeto foi desenvolvido para fins educacionais.
+Projeto de uso acadêmico e educacional.
